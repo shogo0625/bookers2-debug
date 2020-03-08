@@ -21,22 +21,7 @@
 
 			<tbody>
 				<% @users.each do |user| %>
-				<tr>
-					<td><%= attachment_image_tag(user, :profile_image, :fill, 50, 50, fallback: "no-image-mini.jpg") %></td>
-					<td><%= user.name%></td>
-					<td>フォロー数：<%= user.following_user.count %></td>
-					<td>フォロワー数：<%= user.follower_user.count %></td>
-					<% if user.id != current_user.id %>
-						<% if current_user.following?(user) %>
-							<td><%= link_to "フォロー外す", unfollow_path(user), method: :delete %></td>
-						<% else %>
-							<td><%= link_to "フォローする", follow_path(user), method: :post %></td>
-						<% end %>
-					<% else %>
-						<td></td>
-					<% end %>
-					<td><%= link_to "Show", user, class: "user_#{user.id}" %></td>
-				</tr>
+					<%= render 'users/user_index', user: user %>
 				<% end %>
 			</tbody>
 		</table>
